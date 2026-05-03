@@ -1,0 +1,171 @@
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f4f7f6;
+}
+
+.admin-sidebar {
+  width: 260px;
+  background: var(--primary);
+  color: var(--white);
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-sidebar h2 {
+  color: var(--secondary);
+  font-size: 1.5rem;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.admin-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin-nav a {
+  padding: 14px 20px;
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.admin-nav a:hover, .admin-nav a.active {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--secondary);
+}
+
+.admin-content {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+}
+
+.admin-card {
+  background: var(--white);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th {
+  text-align: left;
+  padding: 15px;
+  border-bottom: 2px solid #eee;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.admin-table td {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
+}
+
+/* Admin Form Styles */
+.admin-form-card {
+  background: var(--white);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 40px;
+}
+
+.admin-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.admin-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.admin-input-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.admin-input-group input, .admin-input-group select, .admin-input-group textarea {
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  background: #fcfcfc;
+  font-family: var(--font-body);
+  transition: var(--transition);
+}
+
+.admin-input-group input:focus {
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.1);
+  background: var(--white);
+}
+
+.admin-submit-btn {
+  grid-column: 1 / -1;
+  background: var(--primary);
+  color: var(--white);
+  padding: 15px;
+  border-radius: 10px;
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+.admin-submit-btn:hover {
+  background: var(--secondary);
+  transform: translateY(-2px);
+}
+
+.status-badge {
+  padding: 5px 12px;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.status-in-stock {
+  background: #e6f7ed;
+  color: #27ae60;
+}
+
+.status-low {
+  background: #fff4e5;
+  color: #f39c12;
+}
+
+.action-btn {
+  padding: 8px;
+  border-radius: 8px;
+  margin-right: 5px;
+  font-size: 1.1rem;
+  background: #f9f9f9;
+}
+
+.action-btn:hover {
+  background: #eee;
+}
+
+.action-delete:hover {
+  color: #e74c3c;
+  background: #fee;
+}

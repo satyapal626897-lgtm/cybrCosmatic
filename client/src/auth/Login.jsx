@@ -2,12 +2,11 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
+import "../css/Auth.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
- 
   const [role, setRole] = useState("user");
 
   const { login } = useAuth();
@@ -17,65 +16,52 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post(
-        "http://localhost:8000/api/admin/login",
-        { email, password }
-      );
+      let api = "http://localhost:8000/api/admin/login";
+      const res = await axios.post(api, { email, password });
 
       const userData = res.data;
-
       login(userData);
 
-      
       if (role === "admin" && userData.role === "admin") {
         navigate("/admin/dashboard");
       } else {
         navigate("/");
       }
-
     } catch (err) {
       alert("Invalid email or password");
     }
   };
 
   return (
-    <div>
-      <h2>Login</h2>
+    <div className="auth-container">
+      <div className="auth-card animate-fade-in">
+        <h2>Welcome Back</h2>
+        <p>Enter your details to access your beauty account.</p>
 
-      <form onSubmit={handleLogin}>
+        <form onSubmit={handleLogin} className="auth-form">
+          <div className="form-group">
+            <label>Email Address</label>
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          </div>
 
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+          <div className="form-group">
+            <label>Password</label>
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          </div>
 
-        <br /><br />
+          <div className="form-group">
+            <label>Account Type</label>
+            <select value={role} onChange={(e) => setRole(e.target.value)}>
+              <option value="user">Personal Account</option>
+              <option value="admin">Admin Dashboard</option>
+            </select>
+          </div>
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+          <button type="submit" className="auth-btn">Sign In</button>
+        </form>
 
-        <br /><br />
-
-        {/* 🔥 FIXED MENU */}
-        <select value={role} onChange={(e) => setRole(e.target.value)}>
-          <option value="user">User</option>
-          <option value="admin">Admin</option>
-        </select>
-
-        <br /><br />
-
-        <button type="submit">Login</button>
-      </form>
-
-      <p>
-        Don't have account? <Link to="/signup">Signup</Link>
-      </p>
+        <div className="auth-footer">Don't have an account? <Link to="/signup">Create account</Link></div>
+      </div>
     </div>
   );
 };

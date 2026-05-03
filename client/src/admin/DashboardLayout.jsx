@@ -1,29 +1,29 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
+import "../css/Admin.css";
 
 const DashboardLayout = () => {
+  const location = useLocation();
+  
+  const isActive = (path) => location.pathname === path ? "active" : "";
+
   return (
-    <div style={{ display: "flex", minHeight: "100vh" }}>
-      
-    
-      <div style={{ width: "220px", background: "#111", color: "#fff", padding: "20px" }}>
+    <div className="admin-layout">
+      <div className="admin-sidebar">
         <h2>Admin Panel</h2>
 
-        <nav style={{ display: "flex", flexDirection: "column", gap: "10px", marginTop: "20px" }}>
-          <Link to="/admin/dashboard" style={{ color: "#fff" }}>Dashboard</Link>
-          <Link to="/admin/products" style={{ color: "#fff" }}>Products</Link>
-          <Link to="/admin/products/add" style={{ color: "#fff" }}>Add Product</Link>
-          <Link to="/admin/orders" style={{ color: "#fff" }}>Orders</Link>
+        <nav className="admin-nav">
+          <Link to="/admin/dashboard" className={isActive("/admin/dashboard")}>Dashboard</Link>
+          <Link to="/admin/products" className={isActive("/admin/products")}>Manage Products</Link>
+          <Link to="/" style={{ marginTop: 'auto', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '20px' }}>Back to Store</Link>
         </nav>
       </div>
 
-     
-      <div style={{ flex: 1, padding: "20px" }}>
+      <div className="admin-content">
         <Outlet />
       </div>
-
     </div>
   );
 };
 
-export default DashboardLayout;
+export default DashboardLayout;

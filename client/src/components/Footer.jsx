@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../css/Footer.css";
 
 
@@ -16,18 +17,18 @@ const Footer = () => {
 
         <div className="footer-section">
           <h3>Quick Links</h3>
-          <a href="/">Home</a>
-          <a href="/shop">Shop</a>
-          <a href="/brands">Brands</a>
-          <a href="/about">About</a>
+          <Link to="/">Home</Link>
+          <Link to="/shop">Shop</Link>
+          <Link to="/brands">Brands</Link>
         </div>
+
 
         <div className="footer-section">
           <h3>Customer Care</h3>
-          <a href="/">Contact Us</a>
-          <a href="/">Shipping</a>
-          <a href="/">Returns</a>
-          <a href="/">FAQ</a>
+          <Link to="/">Contact Us</Link>
+          <Link to="/">Shipping</Link>
+          <Link to="/">Returns</Link>
+          <Link to="/">FAQ</Link>
         </div>
 
         <div className="footer-section">
@@ -39,9 +40,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="footer-bottom">
-        © 2026 Satya Beauty | All Rights Reserved
-      </div>
+      <div className="footer-bottom">© 2026 Satya Beauty | All Rights Reserved</div>
     </footer>
   );
 };

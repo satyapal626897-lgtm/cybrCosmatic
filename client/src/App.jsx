@@ -7,36 +7,35 @@ import AdminLogin from "./auth/AdminLogin";
 import Signup from "./auth/Signup";
 import Shop from "./pages/Shop";
 import Cart from "./pages/Cart";
-import Wishlist from "./pages/Wishlist";
+import Brands from "./pages/Brands";
+
+
 
 import DashboardLayout from "./admin/DashboardLayout";
 import Dashboard from "./admin/Dashboard";
 import Product from "./admin/Products";
+import ChatBox from "./components/ChatBox";
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-
-     
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="shop" element={<Shop />} />
           <Route path="cart" element={<Cart />} />
-          <Route path="wishlist" element={<Wishlist />} />
           <Route path="login" element={<Login />} />
           <Route path="admin-login" element={<AdminLogin />} />
           <Route path="signup" element={<Signup />} />
+          <Route path="brands" element={<Brands />} />
         </Route>
 
-        
         <Route path="/admin" element={<DashboardLayout />}>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="products" element={<Product />} />
-          <Route path="orders" element={<div>Orders</div>} />
         </Route>
-
       </Routes>
+      <ChatBox />
     </BrowserRouter>
   );
 };

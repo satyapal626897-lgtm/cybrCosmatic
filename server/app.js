@@ -1,10 +1,13 @@
+require("dotenv").config();
 const express = require("express");
+
 const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
 const adminRoute = require("./routes/adminRoute");
+const productRoute = require("./routes/productRoute");
 
 
 app.use(cors());
@@ -19,6 +22,7 @@ mongoose.connect("mongodb://localhost:27017/beauty")
 
 
 app.use("/api/admin", adminRoute);
+app.use("/api/product", productRoute);
 
 
 
