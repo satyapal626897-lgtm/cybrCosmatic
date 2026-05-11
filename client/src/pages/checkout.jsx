@@ -26,7 +26,8 @@ const Checkout = () => {
         if (!res) return alert("SDK failed to load");
 
         try {
-            const { data } = await axios.post('http://localhost:8000/api/payment/checkout', { amount: total });
+            const backendUrl = import.meta.env.VITE_BACKEND_URL;
+            const { data } = await axios.post(`${backendUrl}/api/payment/checkout`, { amount: total });
             
             if (!data.id) {
                 console.error("Order creation failed:", data);
@@ -34,13 +35,13 @@ const Checkout = () => {
             }
 
             const options = {
-                key: 'rzp_live_SlZXTahVpMCnXF', // Change this to rzp_test_... for demo
+                key: import.meta.env.VITE_RAZORPAY_KEY_ID, 
                 amount: data.amount,
                 order_id: data.id,
                 name: 'Satya Beauty',
                 description: 'Order Payment',
                 handler: async (response) => {
-                    await axios.post('http://localhost:8000/api/payment/verify', {
+                    await axios.post(`${backendUrl}/api/payment/verify`, {
                         ...f, products: cart, amount: total, 
                         paymentId: response.razorpay_payment_id, 
                         orderId: response.razorpay_order_id
