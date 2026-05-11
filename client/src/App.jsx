@@ -8,6 +8,7 @@ import Signup from "./auth/Signup";
 import Shop from "./pages/Shop";
 import Cart from "./pages/Cart";
 import Brands from "./pages/Brands";
+import Checkout from "./pages/checkout";
 
 
 
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="admin-login" element={<AdminLogin />} />
           <Route path="signup" element={<Signup />} />
           <Route path="brands" element={<Brands />} />
+          <Route path="checkout" element={<Checkout />} />
         </Route>
 
         <Route path="/admin" element={<DashboardLayout />}>

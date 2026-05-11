@@ -1,10 +1,11 @@
 import React from 'react';
 import { useCart } from '../context/CartContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../css/Cart.css';
 
 const Cart = () => {
   const { cart, updateQuantity, removeFromCart } = useCart();
+  const navigate = useNavigate();
 
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -25,7 +26,7 @@ const Cart = () => {
             {cart.map(item => (
               <div key={item._id} className="cart-item-card">
                 <img src={item.images[0]} alt={item.name} className="cart-item-img" />
-                
+
                 <div className="cart-item-info">
                   <h3 className="cart-item-name">{item.name}</h3>
                   <p className="cart-item-price">₹{item.price}</p>
@@ -47,7 +48,7 @@ const Cart = () => {
 
           <div className="cart-summary">
             <h3 className="summary-title">Order Summary</h3>
-            
+
             <div className="summary-row">
               <span>Items ({totalItems})</span>
               <span>₹{totalPrice}</span>
@@ -56,14 +57,15 @@ const Cart = () => {
               <span>Shipping</span>
               <span style={{ color: '#00b894', fontWeight: 'bold' }}>Free</span>
             </div>
-            
+
             <div className="summary-total">
               <span>Total</span>
               <span>₹{totalPrice}</span>
             </div>
-            
-            <button className="checkout-btn">
-              Proceed to Checkout
+
+            <button
+              className="checkout-btn"
+              onClick={() => navigate('/checkout')}>Proceed to Checkout
             </button>
           </div>
         </div>
