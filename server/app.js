@@ -23,6 +23,7 @@ mongoose.connect("mongodb://localhost:27017/beauty")
 
 app.use("/api/admin", adminRoute);
 app.use("/api/product", productRoute);
+app.use("/api/payment", require("./routes/paymentRoutes"));
 
 
 
