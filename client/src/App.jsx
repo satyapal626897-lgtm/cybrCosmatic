@@ -1,4 +1,5 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 import Layout from "../Layout";
 import Home from "./pages/Home";
@@ -16,10 +17,14 @@ import DashboardLayout from "./admin/DashboardLayout";
 import Dashboard from "./admin/Dashboard";
 import Product from "./admin/Products";
 import ChatBox from "./components/ChatBox";
+import { useCart } from "./context/CartContext";
+import AlreadyExistsPopup from "./components/AlreadyExistsPopup";
 
 const App = () => {
+  const { showPopup, setShowPopup, popupMsg } = useCart();
   return (
     <BrowserRouter>
+      <Toaster position="top-center" reverseOrder={false} />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
@@ -38,6 +43,11 @@ const App = () => {
         </Route>
       </Routes>
       <ChatBox />
+      <AlreadyExistsPopup 
+        isOpen={showPopup} 
+        onClose={() => setShowPopup(false)} 
+        message={popupMsg} 
+      />
     </BrowserRouter>
   );
 };

@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
+import toast from "react-hot-toast";
+import AlreadyExistsPopup from "../components/AlreadyExistsPopup";
 import "../css/Admin.css";
 
 const Product = () => {
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupMsg, setPopupMsg] = useState("");
   const [product, setProduct] = useState({
     name: "",
     price: "",
@@ -11,6 +15,7 @@ const Product = () => {
     stock: "",
     images: []
   });
+  const [loading, setLoading] = useState(false);
 
  
   const mockProducts = [
@@ -30,6 +35,7 @@ const Product = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const formData = new FormData();
     formData.append("name", product.name);
     formData.append("price", product.price);
@@ -41,16 +47,32 @@ const Product = () => {
 
     try {
       await axios.post("http://localhost:8000/api/product/add", formData);
-      alert("Product Added Successfully!");
+      toast.success("Product Added Successfully!");
 
     } catch (err) {
       console.error(err);
-      alert("Error adding product");
+      if (err.response && err.response.data && err.response.data.message) {
+        if (err.response.data.message === "Product already exists") {
+          setPopupMsg("A product with this name is already in your catalog!");
+          setShowPopup(true);
+        } else {
+          toast.error(err.response.data.message);
+        }
+      } else {
+        toast.error("Error adding product");
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="admin-products-page">
+      <AlreadyExistsPopup 
+        isOpen={showPopup} 
+        onClose={() => setShowPopup(false)} 
+        message={popupMsg} 
+      />
       <div className="admin-header">
         <h1>Manage Products</h1>
         <button className="btn-primary" style={{ padding: '10px 20px' }}>+ Add New Product</button>
@@ -93,7 +115,9 @@ const Product = () => {
             <input type="file" multiple onChange={handleImages} required style={{ border: '1px dashed #ccc', padding: '20px', background: '#fcfcfc' }} />
           </div>
 
-          <button type="submit" className="admin-submit-btn">Publish Product</button>
+          <button type="submit" className="admin-submit-btn" disabled={loading}>
+            {loading ? "Publishing..." : "Publish Product"}
+          </button>
         </form>
       </div>
 

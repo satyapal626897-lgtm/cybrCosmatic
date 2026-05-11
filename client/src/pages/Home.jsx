@@ -4,15 +4,13 @@ import heroImg from '../assets/hero.png'
 import { useState, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 const Home = () => { 
 
   const { cart, addToCart } = useCart();
-  const [toastMsg, setToastMsg] = useState("");
 
   const handleAddToCart = (product) => {
     addToCart(product);
-    setToastMsg(`😊${product.name} added to your cart!`);
-    setTimeout(() => setToastMsg(""), 3000);
   };
 
   const products = [
@@ -130,19 +128,6 @@ const Home = () => {
   return (
     <div className="home-container" style={{ position: 'relative' }}>
       
-      
-      {toastMsg && (
-        <div style={{
-          position: 'fixed', top: '80px', left: '50%', transform: 'translateX(-50%)',
-          backgroundColor: '#2d3436', color: '#fff', padding: '12px 24px',
-          borderRadius: '30px', zIndex: 9999, boxShadow: '0 10px 25px rgba(0,0,0,0.2)',
-          fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px',
-          transition: 'all 0.3s ease', animation: 'fadeInDown 0.4s ease-out'
-        }}>
-          {toastMsg}
-        </div>
-      )}
-     
       <section className="hero">
         <div className="hero-circle"></div>
         <div className="hero-content animate-fade-in">
